@@ -9,7 +9,7 @@
       <nav class="mdl-navigation mdl-layout--large-screen-only">
       {% for page in site.pages %}
         {% if page.title %}
-        <a class="mdl-navigation__link" href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
+        <a class="mdl-button mdl-button-white mdl-js-button mdl-js-ripple-effect" href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
         {% endif %}
       {% endfor %}
       </nav>
@@ -29,7 +29,7 @@
 
       <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="menu-lower-left">
         {% for option in site.more_vert %}
-        <li><a href="{{ option[1].link }}" class="mdl-menu__item">{{ option[1].name }}</a></li>
+        <li><a href="{{ option[1].link }}" class="mdl-button mdl-js-button mdl-js-ripple-effect">{{ option[1].name }}</a></li>
         {% endfor %}
       </ul>
     </div>
@@ -46,4 +46,3 @@
     </nav>
 
   </div>
-

@@ -2,74 +2,63 @@
 layout: default
 ---
 <div class="page-content">
-  <div class="mdl-grid">
-  {% if site.post_type == 'highlight' %}
+  <div class="demo-blog__posts mdl-grid" style="margin-top: 50px; margin-bottom: 50px;">
+  {% for post in site.posts %}
 
-    {% include highlight_post.html %}
+  <div class="mdl-card mdl-cell mdl-cell--12-col">
+            <div class="mdl-card__media mdl-color-text--grey-50" {%if post.image %}style="background-image: url({{ post.image }});"{% endif %}>
+              <h3><a href="entry.html" style="text-shadow: 1px 1px 3px black">{{ post.title }}</a></h3>
+            </div>
+            <div class="mdl-color-text--grey-600 mdl-card__supporting-text">
+              {{ post.excerpt }}
+            </div>
+            <div class="mdl-card__supporting-text meta mdl-color-text--grey-600">
+              <div class="minilogo"></div>
+              <div>
+                <strong>{% if post.author %}{{ post.author }} {% else %}The Underground Engineer{% endif %}</strong>
+                <span>{{ post.date | date: "%b %-d, %Y" }}</span>
+              </div>
+            </div>
+  </div>
 
-    {% for post in site.posts offset:1 %}
+  <!--
 
-    <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-desktop mdl-cell--4-col-tablet  mdl-cell--12-col-phone">
-      <div class="mdl-card__title" {% if post.image %} style="background: url('{{ post.image }}') center/cover;" {% endif %}>
-        <h2 class="mdl-card__title-text">{{ post.title }}</h2>
-      </div>
-      <div class="mdl-card__supporting-text">
-        {{ post.excerpt }}
-      </div>
-      <button class="post-button mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" onclick="location.href='{{ post.url | prepend: site.baseurl }}'">
-        <i class="material-icons">keyboard_arrow_right</i>
-      </button>
-      <div class="mdl-card__actions mdl-card--border">
-        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="{{ post.url | prepend: site.baseurl }}">
-          {{ post.date | date: "%b %-d, %Y" }}
-        </a>
-      </div>
-      <div class="mdl-card__menu">
-        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" id="post-{{ post.id }}">
-          <i class="material-icons">share</i>
-        </button>
-        <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="post-{{ post.id }}">
-          <li><a href="https://www.facebook.com/dialog/share?app_id={app_id}&display=page&href={{ post.url | prepend: site.baseurl }}&redirect_uri={{ site.baseurl }}" class="mdl-menu__item">Facebook</a></li>
-          <li><a href="https://twitter.com/share?url={{ post.url | prepend: site.baseurl }}&text={{ post.title }}&via={{ site.twitter_username }}" class="mdl-menu__item">Twitter</a></li>
-          <li><a href="https://plus.google.com/share?url={{ post.url | prepend: site.baseurl }}" class="mdl-menu__item">Google+</a></li>
-        </ul>
-      </div>
+  <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-desktop mdl-cell--4-col-tablet  mdl-cell--12-col-phone">
+    <div class="mdl-card__title" {% if post.image %} style="background: url('{{ post.image }}') center/cover;" {% endif %}>
+      <h2 class="mdl-card__title-text">{{ post.title }}</h2>
     </div>
-    {% endfor %}
-
-  {% else %}
-
-    {% for post in site.posts %}
-
-    <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-desktop mdl-cell--4-col-tablet  mdl-cell--12-col-phone">
-      <div class="mdl-card__title" {% if post.image %} style="background: url('{{ post.image }}') center/cover;" {% endif %}>
-        <h2 class="mdl-card__title-text">{{ post.title }}</h2>
-      </div>
-      <div class="mdl-card__supporting-text">
-        {{ post.excerpt }}
-      </div>
-      <button class="post-button mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" onclick="location.href='{{ post.url | prepend: site.baseurl }}'">
-        <i class="material-icons">keyboard_arrow_right</i>
-      </button>
-      <div class="mdl-card__actions mdl-card--border">
-        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="{{ post.url | prepend: site.baseurl }}">
-          {{ post.date | date: "%b %-d, %Y" }}
-        </a>
-      </div>
-      <div class="mdl-card__menu">
-        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" id="post-{{ post.id }}">
-          <i class="material-icons">share</i>
-        </button>
-        <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="post-{{ post.id }}">
-          <li><a href="https://www.facebook.com/dialog/share?app_id={app_id}&display=page&href={{ post.url | prepend: site.baseurl }}&redirect_uri={{ site.baseurl }}" class="mdl-menu__item">Facebook</a></li>
-          <li><a href="https://twitter.com/share?url={{ post.url | prepend: site.baseurl }}&text={{ post.title }}&via={{ site.twitter_username }}" class="mdl-menu__item">Twitter</a></li>
-          <li><a href="https://plus.google.com/share?url={{ post.url | prepend: site.baseurl }}" class="mdl-menu__item">Google+</a></li>
-        </ul>
-      </div>
+    <div class="mdl-card__supporting-text">
+      {{ post.excerpt }}
     </div>
-
-    {% endfor %}
-
-  {% endif %}
+    <button class="post-button mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" onclick="location.href='{{ post.url | prepend: site.baseurl }}'">
+      <i class="material-icons">keyboard_arrow_right</i>
+    </button>
+    <div class="mdl-card__actions mdl-card--border">
+      <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="{{ post.url | prepend: site.baseurl }}">
+        {{ post.date | date: "%b %-d, %Y" }}
+      </a>
+    </div>
+    <div class="mdl-card__menu">
+      <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" id="post-{{ post.id }}">
+        <i class="material-icons">share</i>
+      </button>
+      <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="post-{{ post.id }}">
+        <li><a href="https://www.facebook.com/dialog/share?app_id={app_id}&display=page&href={{ post.url | prepend: site.baseurl }}&redirect_uri={{ site.baseurl }}" class="mdl-menu__item">Facebook</a></li>
+        <li><a href="https://twitter.com/share?url={{ post.url | prepend: site.baseurl }}&text={{ post.title }}&via={{ site.twitter_username }}" class="mdl-menu__item">Twitter</a></li>
+        <li><a href="https://plus.google.com/share?url={{ post.url | prepend: site.baseurl }}" class="mdl-menu__item">Google+</a></li>
+      </ul>
+    </div>
+  </div>
+  -->
+  {% endfor %}
+  <nav class="demo-nav mdl-cell mdl-cell--12-col">
+    <div class="section-spacer"></div>
+    <!--<a href="#" class="demo-nav__button">
+      More
+      <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons">arrow_forward</i>
+      </button>
+    </a>-->
+  </nav>
   </div>
 </div>
